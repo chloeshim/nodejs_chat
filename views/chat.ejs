@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="styles.css">
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+			<% for(var i=0; i < data.length; i++) { %>
+				var t = new Date(Date.parse("<%= data[i].time %>"));
+        $("ul").append("<li class=\"message\">" 
+					+ "<li class=\"member\">" + "<%= data[i].user_id %>" + "</li>" 
+          + "<li class=\"time\">" + t.toLocaleString() + "</li>" 
+          + "<li class=\"message\">" + "<%= data[i].message %>" + "</li>" 
+          + "</ul>");
+				<% } %>
+
+			var socket = io();
+      $('form#msg').submit(function(e){
+				var dt = new Date().toISOString().slice(0, 19).replace('T', ' ');
+        var new_message = {user_id : "<%= user %>", message : $('#m').val(), time : dt};
+        e.preventDefault(); // prevents page reloading
+        socket.emit('chat message', new_message);
+        $('#m').val('');
+        return false;
+      });
+      
+			socket.on('chat message', function(msg){
+				$('#messages').append($('<li class="member">').text(msg.user_id));
+        $('#messages').append($('<li class="time">').text(msg.time));
+        $('#messages').append($('<li class="message">').text(msg.message));
+      });
+    });
+  </script>
+</head>
+<body>
+  <ul id="messages" class="messages"></ul>
+  <form id="msg" class="message-form" onsubmit="return false;">
+    <input id="m" class="message-form__input" type="text"/>
+    <input class="message-form__button" value="Post" type="submit"/>
+  </form>
+  <form id="logout" class="logout" method="post">
+  <button type="submit">Logout</button>
+  </form>
+</body>
+</html>

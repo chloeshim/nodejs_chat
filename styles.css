@@ -1,0 +1,62 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.messages {
+  border: 1px solid #e4e4e4;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+.message {
+  padding: 5px 0;
+}
+ul {
+    list-style-type: none;
+}
+li {
+    
+}
+li.member {
+    float: left;
+    display: inline-block;
+    padding-right: 10px;
+    position: relative;
+    color: rgb(235, 149, 13);
+}
+li.time {
+  float: right;
+}
+
+.message-form {
+  display: flex;
+  flex-shrink: 0;
+}
+.message-form__input {
+  flex-grow: 1;
+  border: 1px solid #dfdfdf;
+  padding: 10px 15px;
+  font-size: 16px;
+}
+.message-form__button {
+  margin: 10px;
