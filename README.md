@@ -1,4 +1,4 @@
-# fsechat
+# chat app with node.js and express 
 How to make it work:
 
 ```
